@@ -1,0 +1,78 @@
+include: fedora-common-ostree.yaml
+
+ref: desktop
+rojig:
+  name: desktop
+  summary: "Desktop"
+  license: MIT
+
+repos:
+  - fedora
+  - fedora-updates
+  - rpmfusion-free
+  - rpmfusion-free-updates
+  - rpmfusion-nonfree
+  - rpmfusion-nonfree-updates
+  - yellowhat
+
+packages:
+# Hardware/drivers
+  - kernel
+  - kernel-modules-extra
+  - iwlax2xx-firmware
+  - intel-media-driver
+  - igt-gpu-tools
+  - alsa-utils
+  - bluez
+  - simple-mtpfs
+  - NetworkManager-wifi
+  - ntfs-3g
+  - openvpn
+  - wireguard-tools
+# System
+  - acl
+  - attr
+  - basesystem
+  - cryptsetup
+  - dnsmasq
+  - filesystem
+  - glibc-langpack-en
+  - hostname
+  - iproute
+  - kbd
+  - nss-altfiles
+  - pciutils
+  - fwupd
+  # don't care, but rpm-ostree build fails otherwise
+  - selinux-policy-targeted
+  - sudo
+  - usbutils
+# Shell toos
+  - fzf
+  - git
+  - htop
+  - neovim
+  - tree
+  - unzip
+  - zsh
+# Fonts
+  - google-noto-emoji-color-fonts
+  - google-noto-sans-symbols-fonts
+# Sway
+  - sway
+  - grim
+  - slurp
+  - foot
+  - wl-clipboard
+  - mpv
+  - yt-dlp
+  - statusbar
+  - zathura
+  - zathura-pdf-mupdf
+
+exclude-packages:
+  - alacritty
+  - brltty
+  - glibc-all-langpacks
+
+postprocess-script: post.sh

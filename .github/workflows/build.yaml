@@ -1,0 +1,25 @@
+---
+name: Build
+
+on:
+  - push
+
+env:
+  VERSION: "36"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: registry.fedoraproject.org/fedora:36
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v3
+      - run: bash scripts/build_ostree.sh
+      - run: bash scripts/build_iso.sh
+      - id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%dT%H%M%S')"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: fedora-${{ env.VERSION }}-${{ steps.date.outputs.date }}.iso
+          path: output/images/boot.iso
